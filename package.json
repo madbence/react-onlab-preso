@@ -1,0 +1,28 @@
+{
+  "name": "react-onlab-preso",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "npm run build:css & npm run build:html & wait",
+    "build:css": "stylus style.styl",
+    "build:html": "jade index.jade",
+    "watch": "npm run watch:css & npm run watch:html & wait",
+    "watch:css": "stylus -w style.styl",
+    "watch:html": "jade -w index.jade"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madbence/react-onlab-preso.git"
+  },
+  "author": "Bence Dányi <bence@danyi.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/madbence/react-onlab-preso/issues"
+  },
+  "homepage": "https://github.com/madbence/react-onlab-preso#readme",
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "jade": "^1.11.0",
+    "stylus": "^0.52.4",
+    "watchify": "^3.4.0"
+  }
+}

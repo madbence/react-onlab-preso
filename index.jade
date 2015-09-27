@@ -1,0 +1,117 @@
+doctype html
+html(lang='en')
+  head
+    title App development using React + Redux
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=1024px, initial-scale=1')
+    link(rel='stylesheet', href='style.css')
+  body
+    #impress
+      .step(data-x='0' data-y='-1000' data-scale='4')
+        h1 react + redux 101
+        h2 bence dányi <bence@danyi.me>
+      .step(data-x='-1500', data-y='0')
+        h1 wat?
+        ul
+          li 2013, facebook
+          li creating user interfaces (V in the MVC)
+          li virtual DOM (real DOM is <em>slow</em>)
+          li server-side rendering (awesome for SEO)
+      .step
+        h1 example (es5)
+        pre.
+          var Greeting = <span class=highlight>React.createClass</span>({
+            <span class=highlight>render</span>: function () {
+              return <span class=highlight>React.createElement('div', <span class=highlight>null</span>, <span class=highlight-2>'Hello ', this.props.name, '!'</span>)</span>;
+            },
+          });
+
+          var mount = document.getElementById('some-element-id');
+          React.render(<span class=highlight>React.createElement(Greeting, <span class=highlight>{ name: 'Bence' }</span>)</span>, mount);
+      .step(data-x='0' data-y='1000')
+        h1 example (es5 + jsx)
+        pre.
+          var Greeting = React.createClass({
+            render: function () {
+              return <span class=highlight>&lt;div><span class=highlight-2>Hello {this.props.name}!</span>&lt;/div></span>;
+            },
+          });
+
+          var mount = document.getElementById('some-element-id');
+          React.render(<span class=highlight>&lt;Greeting <span class=highlight>name="Bence"</span> /></span>, mount);
+      .step(data-x='0' data-y='2000')
+        h1 example (es6 + jsx)
+        pre.
+          <span class=highlight>import { Component, render } from 'react'</span>;
+
+          <span class=highlight>class Greeting extends Component</span> {
+            <span class=highlight>render</span>() {
+              return &lt;div>Hello {this.props.name}!&lt;/div>;
+            }
+          }
+
+          const mount = document.getElementById('some-element-id');
+          render(&lt;Greeting name="Bence" />, mount);
+      .step(data-y=2000 data-x=1500 class='wide')
+        h1 btw, es6?
+        ul
+          li <code>let, const</code>
+          li fat arrow: <code>x => x*x</code>
+          li default params: <code>function (a, b = 2) { /* ... */ }</code>
+          li rest params: <code>function (a, b, ...rest) { /* ... */ }</code>
+          li spread params: <code>function (...args) { f(123, ...args); }</code>
+          li object shorthand props: <code>{ foo: foo, bar }</code>
+          li destructuring: <code>const [a, b] = [1, 2];</code>
+          li class syntax, module imports/exports
+          li (<code>yield/yield*</code>, <code>async/await</code>)
+          li etc...
+      .step(data-x=1500 data-y=1000)
+        h1 redux, the state container
+        pre.
+          import { createStore } from 'redux';
+
+          const store = createStore((state, action) => {
+            switch(action.type) {
+              case 'TICK':
+              return { n: state.n + 1 };
+            }
+            return state;
+          }, { n: 0 });
+
+          export default store;
+      .step(data-x=1500)
+        h1 connecting redux with react
+        pre.
+          import { connect } from 'react-redux';
+
+          class Ticker extend Component {
+            render() {
+              return &lt;div>
+                {this.props.n}
+                &lt;button <span class=highlight>onClick={this.onClick.bind(this)}</span>>tick&lt;/button>
+              &lt;/div>;
+            }
+            onClick() {
+              <span class=highlight>this.props.dispatch({
+                type: 'TICK'
+              })</span>;
+            }
+          }
+
+          export default <span class=highlight>connect(state => state)(Ticker)</span>;
+      .step(data-x=1500 data-y=-1000)
+        h1 putting it together
+        pre.
+          import store from './store';
+          import Ticker from './ticker';
+          import { Provider } from 'react-redux';
+          import { render } from 'react';
+
+          render(
+            &lt;Provider store={store}>
+              {() => &lt;Ticker />}
+            &lt;/Provider>,
+            document.getElementById('some-element-id')
+          )
+    script(src='impress.js')
+    script impress().init()
