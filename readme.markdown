@@ -2,7 +2,7 @@
 
 ## build
 
-```js
+```sh
 $ npm i # install deps
 $ npm run build # watch with $ npm run watch
 ```
