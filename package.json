@@ -20,9 +20,7 @@
   },
   "homepage": "https://github.com/madbence/react-onlab-preso#readme",
   "devDependencies": {
-    "browserify": "^11.2.0",
     "jade": "^1.11.0",
-    "stylus": "^0.52.4",
-    "watchify": "^3.4.0"
+    "stylus": "^0.52.4"
   }
 }
