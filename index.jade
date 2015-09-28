@@ -28,7 +28,7 @@ html(lang='en')
 
           var mount = document.getElementById('some-element-id');
           React.render(<span class=highlight>React.createElement(Greeting, <span class=highlight>{ name: 'Bence' }</span>)</span>, mount);
-      .step(data-x='0' data-y='1000')
+      .step(data-z=-2000 data-scale=0.2 data-y=100)
         h1 example (es5 + jsx)
         pre.
           var Greeting = React.createClass({
@@ -39,7 +39,7 @@ html(lang='en')
 
           var mount = document.getElementById('some-element-id');
           React.render(<span class=highlight>&lt;Greeting <span class=highlight>name="Bence"</span> /></span>, mount);
-      .step(data-x='0' data-y='2000')
+      .step(data-z=-4000 data-scale=0.2 data-y=200)
         h1 example (es6 + jsx)
         pre.
           <span class=highlight>import { Component, render } from 'react'</span>;
@@ -65,6 +65,13 @@ html(lang='en')
           li class syntax, module imports/exports
           li (<code>yield/yield*</code>, <code>async/await</code>)
           li etc...
+      .step(data-x=1500 data-y=1000 data-z=-1000 data-scale=0.2)
+        h1 wat is redux?
+        ul
+          li flux architecture (fancy name for MVC, "invented" by facebook)
+          li immutable data
+          li <code>(state, action) -> state</code>
+          li deterministic (time traveling, event replay, undo/redo)
       .step(data-x=1500 data-y=1000)
         h1 redux, the state container
         pre.
