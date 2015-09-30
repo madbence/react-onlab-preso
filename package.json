@@ -5,6 +5,7 @@
     "build": "npm run build:css & npm run build:html & wait",
     "build:css": "stylus style.styl",
     "build:html": "jade index.jade",
+    "publish": "./publish",
     "watch": "npm run watch:css & npm run watch:html & wait",
     "watch:css": "npm run build:css -- -w",
     "watch:html": "npm run build:html -- -w"
