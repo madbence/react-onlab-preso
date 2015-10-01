@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en"><head><title>App development using React + Redux</title><meta charset="utf-8"><meta name="viewport" content="width=1024px, initial-scale=1"><link rel="stylesheet" href="style.css"></head><body><div id="impress"><div data-x="0" data-y="-1000" data-scale="4" class="step"><h1>react + redux 101</h1><h2>bence dányi <bence@danyi.me></h2></div><div data-x="-1500" data-y="0" class="step"><h1>wat?</h1><ul><li>2013, facebook</li><li>creating user interfaces (V in the MVC)</li><li>virtual DOM (real DOM is <em>slow</em>)</li><li>server-side rendering (awesome for SEO)</li></ul></div><div class="step"><h1>example (es5)</h1><pre>var Greeting = <span class=highlight>React.createClass</span>({
+  <span class=highlight>render</span>: function () {
+    return <span class=highlight>React.createElement('div', <span class=highlight>null</span>, <span class=highlight-2>'Hello ', this.props.name, '!'</span>)</span>;
+  },
+});
+
+var mount = document.getElementById('some-element-id');
+React.render(<span class=highlight>React.createElement(Greeting, <span class=highlight>{ name: 'Bence' }</span>)</span>, mount);</pre></div><div data-z='-2000' data-scale='0.2' data-y='100' class="step"><h1>example (es5 + jsx)</h1><pre>var Greeting = React.createClass({
+  render: function () {
+    return <span class=highlight>&lt;div><span class=highlight-2>Hello {this.props.name}!</span>&lt;/div></span>;
+  },
+});
+
+var mount = document.getElementById('some-element-id');
+React.render(<span class=highlight>&lt;Greeting <span class=highlight>name="Bence"</span> /></span>, mount);</pre></div><div data-z='-4000' data-scale='0.2' data-y='200' class="step"><h1>example (es6 + jsx)</h1><pre><span class=highlight>import { Component, render } from 'react'</span>;
+
+<span class=highlight>class Greeting extends Component</span> {
+  <span class=highlight>render</span>() {
+    return &lt;div>Hello {this.props.name}!&lt;/div>;
+  }
+}
+
+const mount = document.getElementById('some-element-id');
+render(&lt;Greeting name="Bence" />, mount);</pre></div><div data-y='2000' data-x='1500' class="step wide"><h1>btw, es6?</h1><ul><li><code>let, const</code></li><li>fat arrow: <code>x => x*x</code></li><li>default params: <code>function (a, b = 2) { /* ... */ }</code></li><li>rest params: <code>function (a, b, ...rest) { /* ... */ }</code></li><li>spread params: <code>function (...args) { f(123, ...args); }</code></li><li>object shorthand props: <code>{ foo: foo, bar }</code></li><li>destructuring: <code>const [a, b] = [1, 2];</code></li><li>class syntax, module imports/exports</li><li>(<code>yield/yield*</code>, <code>async/await</code>)</li><li>etc...</li></ul></div><div data-x='1500' data-y='3000' class="step"><h1><a href='https://facebook.github.io/react/docs/flux-overview.html'>flux</a></h1><img src="flux-chart.png"></div><div data-x='1500' data-y='3500' data-z='-1000' class="step future-hide"><h1>react as view + <a href='http://rackt.github.io/redux/'>redux</a> as state</h1><img src="now-kiss.gif"></div><div data-x='1500' data-y='4000' data-z='-2000' class="step future-hide"><h1>explaining redux</h1><img src="explaining-redux.gif"></div><div data-x='1500' data-y='1000' data-z='-1000' data-scale='0.2' class="step"><h1>wat is redux?</h1><ul><li>inspired by <a href='http://elm-lang.org/'>Elm</a></li><li>flux architecture (fancy name for MVC, "invented" by facebook)</li><li>immutable data</li><li><code>(state, action) -> state</code></li><li>deterministic (time traveling, event replay, undo/redo)</li></ul></div><div data-x='1500' data-y='1000' class="step"><h1>redux, the state container</h1><pre>import { createStore } from 'redux';
+
+const store = createStore((state, action) => {
+  switch(action.type) {
+    case 'TICK':
+    return { n: state.n + 1 };
+  }
+  return state;
+}, { n: 0 });
+
+export default store;</pre></div><div data-x='1500' class="step"><h1>connecting redux with react</h1><pre>import { connect } from 'react-redux';
+
+class Ticker extend Component {
+  render() {
+    return &lt;div>
+      {this.props.n}
+      &lt;button <span class=highlight>onClick={this.onClick.bind(this)}</span>>tick&lt;/button>
+    &lt;/div>;
+  }
+  onClick() {
+    <span class=highlight>this.props.dispatch({
+      type: 'TICK'
+    })</span>;
+  }
+}
+
+export default <span class=highlight>connect(state => state)(Ticker)</span>;</pre></div><div data-x='1500' data-y='-1000' class="step"><h1>putting it together</h1><pre>import store from './store';
+import Ticker from './ticker';
+import { Provider } from 'react-redux';
+import { render } from 'react';
+
+render(
+  &lt;Provider store={store}>
+    {() => &lt;Ticker />}
+  &lt;/Provider>,
+  document.getElementById('some-element-id')
+)</pre></div><div data-x='3000' data-y='-1000' class="step"><h1>compile with browserify + babelify transform</h1><pre>$ browserify main.js -t babelify -o bundle.js</pre></div></div><script src="impress.js"></script><script>impress().init()</script></body></html>
