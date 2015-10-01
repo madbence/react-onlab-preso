@@ -66,11 +66,18 @@ html(lang='en')
           li (<code>yield/yield*</code>, <code>async/await</code>)
           li etc...
       .step(data-x=1500 data-y=3000)
-        h1 flux
+        h1 <a href='https://facebook.github.io/react/docs/flux-overview.html'>flux</a>
         img(src='flux-chart.png')
+      .step(data-x=1500 data-y=3500 data-z=-1000)
+        h1 react as view + <a href='http://rackt.github.io/redux/'>redux</a> as state
+        img(src='now-kiss.gif')
+      .step(data-x=1500 data-y=4000 data-z=-2000)
+        h1 explaining redux
+        img(src='explaining-redux.gif')
       .step(data-x=1500 data-y=1000 data-z=-1000 data-scale=0.2)
         h1 wat is redux?
         ul
+          li inspired by <a href='http://elm-lang.org/'>Elm</a>
           li flux architecture (fancy name for MVC, "invented" by facebook)
           li immutable data
           li <code>(state, action) -> state</code>
@@ -123,5 +130,9 @@ html(lang='en')
             &lt;/Provider>,
             document.getElementById('some-element-id')
           )
+      .step(data-x=3000 data-y=-1000)
+        h1 compile with browserify + babelify transform
+        pre.
+          $ browserify main.js -t babelify -o bundle.js
     script(src='impress.js')
     script impress().init()
